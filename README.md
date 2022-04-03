@@ -48,7 +48,8 @@ python app/game.py
 
 Run the inventory report: 
 ```sh 
-python app/groceries.py
+#python app/groceries.py
+python -m app.groceries
 ```
 
 
@@ -61,5 +62,6 @@ python app/stocks.py
 
 Run the crypto report: 
 ```sh 
-python app/crypto.py
+#python app/crypto.py
+python -m app.crypto
 ```
