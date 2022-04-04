@@ -55,7 +55,8 @@ python -m app.groceries
 
 Run the stocks report: 
 ```sh 
-python app/stocks.py
+#python app/stocks.py
+python -m app.stocks
 ``` 
 
 
