@@ -25,6 +25,14 @@ if __name__ == "__main__":
     print(to_usd(float(price)))
 
 
+
 #we want the global scope to be clean 
 #nesting code in the main condition will allow other scripts to cleanly import functions from this file
 #main conditional can still run the whole utilities file 
+
+#def determine_winner(u,c):
+    """
+    """
+    #gamewinner = winner[u][c]
+
+    #return 
