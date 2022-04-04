@@ -7,6 +7,7 @@ from random import choice
 valid_selections = ["rock", "paper", "scissors"]
 
 
+
 #
 # USER SELECTION
 #
@@ -28,23 +29,32 @@ print("COMPUTER CHOICE:", c)
 # DETERMINATION OF WINNER
 #
 
-if u == "rock" and c == "rock":
-    print("It's a tie!")
-elif u == "rock" and c == "paper":
-    print("The computer wins")
-elif u == "rock" and c == "scissors":
-    print("The user wins")
 
-elif u == "paper" and c == "rock":
-    print("The computer wins")
-elif u == "paper" and c == "paper":
-    print("It's a tie!")
-elif u == "paper" and c == "scissors":
-    print("The user wins")
+winner = {
+    "rock":{
+        "rock": None,
+        "paper": "paper",
+        "scissors": "rock",
+    },
+    "paper":{
+        "rock": "paper",
+        "paper": None, # represents a tie
+        "scissors": "scissors",
+    },
+     "scissors":{
+        "rock": "rock",
+        "paper": "scissors",
+        "scissors": None, # represents a tie
+    },
+}
 
-elif u == "scissors" and c == "rock":
-    print("The computer wins")
-elif u == "scissors" and c == "paper":
-    print("The user wins")
-elif u == "scissors" and c == "scissors":
+
+    
+gamewinner = winner[u][c]
+
+if gamewinner == u:
+    print("User Won!")
+elif gamewinner == c:
+    print("The Computer Won!")
+elif gamewinner is None: 
     print("It's a tie!")
