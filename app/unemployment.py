@@ -10,6 +10,9 @@ import requests
 
 load_dotenv()
 
+from app.utilities import to_usd
+
+
 ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY", default="demo")
 
 # docs: https://www.alphavantage.co/documentation/#unemployment
@@ -27,11 +30,11 @@ def fetch_unemployment_data():
         return None
 
         
-#print(parsed_response)
+print(parsed_response)
 
-#data = parsed_response["data"]
-#latest = data[0]
-#print(latest) #> {'date': '2022-02-01', 'value': '3.8'}
+data = parsed_response["data"]
+latest = data[0]
+print(latest) #> {'date': '2022-02-01', 'value': '3.8'}
 
 
 #exit()
