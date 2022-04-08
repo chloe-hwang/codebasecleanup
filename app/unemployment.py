@@ -1,52 +1,53 @@
 
 
 print("UNEMPLOYMENT REPORT...")
+from app.alphavantage_service import fetch_unemployment_data
+fetch_unemployment_data()
+
+# import os
+# import json
+# from dotenv import load_dotenv
+# import requests
+
+# load_dotenv()
 
 
-import os
-import json
-from dotenv import load_dotenv
-import requests
+# ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY", default="demo")
 
-load_dotenv()
+# # docs: https://www.alphavantage.co/documentation/#unemployment
 
+# url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={ALPHAVANTAGE_API_KEY}"
+# response = requests.get(url)
+# parsed_response = json.loads(response.text)
 
-ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY", default="demo")
+# #data = parsed_response["data"]
+# #latest = data[0]
+# #print(latest) #> {'date': '2022-02-01', 'value': '3.8'}
 
-# docs: https://www.alphavantage.co/documentation/#unemployment
-
-url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={ALPHAVANTAGE_API_KEY}"
-response = requests.get(url)
-parsed_response = json.loads(response.text)
-
-data = parsed_response["data"]
-latest = data[0]
-print(latest) #> {'date': '2022-02-01', 'value': '3.8'}
-
-from pandas import DataFrame
-from plotly.express import bar
+# from pandas import DataFrame
+# from plotly.express import bar
 
 
-df = DataFrame(data)
-print(df.head())
+# df = DataFrame(data)
+# print(df.head())
 
-fig = bar(df, x="date", y="value", title="Unemployment Rates")
-fig.update_yaxes(
-         tickprefix="$",
-         ticksuffix="%",
-         showgrid=True
-     )
-fig.show()
+# fig = bar(df, x="date", y="value", title="Unemployment Rates")
+# fig.update_yaxes(
+#          tickprefix="$",
+#          ticksuffix="%",
+#          showgrid=True
+#      )
+# fig.show()
 
 
-print("DATAVIZ EXPORT...")
+# print("DATAVIZ EXPORT...")
 
-img_filepath = os.path.join(os.path.dirname(__file__), "..", "reports", "unemployment.png")
-fig.write_image(img_filepath)
+# img_filepath = os.path.join(os.path.dirname(__file__), "..", "reports", "unemployment.png")
+# fig.write_image(img_filepath)
 
-print("CSV EXPORT...")
-csv_filepath = os.path.join(os.path.dirname(__file__), "..", "reports", "unemployment.csv")
-df.to_csv(csv_filepath, index=False)
+# print("CSV EXPORT...")
+# csv_filepath = os.path.join(os.path.dirname(__file__), "..", "reports", "unemployment.csv")
+# df.to_csv(csv_filepath, index=False)
 
 
 # def fetch_unemployment_data():

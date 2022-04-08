@@ -37,10 +37,9 @@ def fetch_crypto_data(symbol):
 
 def fetch_stocks_data(symbol):
     url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv"
-
     df = read_csv(url)
     #latest = df.iloc[0]
-    return df
+    return df 
 
 
 def fetch_unemployment_data():
@@ -50,6 +49,9 @@ def fetch_unemployment_data():
     data = parsed_response["data"]
     latest = data[0]
     print(latest) #> {'date': '2022-02-01', 'value': '3.8'}
+
+
+
     from pandas import DataFrame
     from plotly.express import bar
 
