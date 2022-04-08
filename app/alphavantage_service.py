@@ -15,7 +15,7 @@ load_dotenv()
 
 ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY", default="demo")
 
-
+#collaborated with Frank and Anna on this!
 def fetch_crypto_data(symbol):
     url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&market=USD&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}"
     response = requests.get(url)
@@ -42,6 +42,7 @@ def fetch_stocks_data(symbol):
     return df 
 
 
+#collaborated with Frank and Anna on this! 
 def fetch_unemployment_data():
     url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={ALPHAVANTAGE_API_KEY}"
     response = requests.get(url)
