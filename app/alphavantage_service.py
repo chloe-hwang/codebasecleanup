@@ -20,19 +20,74 @@ def fetch_crypto_data(symbol):
     url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&market=USD&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}"
     response = requests.get(url)
     parsed_response = json.loads(response.text)
-    return parsed_response["Time Series (Digital Currency Daily)"]
+    tsd = parsed_response["Time Series (Digital Currency Daily)"]
+
+    dates = list(tsd.keys())
+    latest_date = dates[0]
+    latest = tsd[latest_date]
+        # #print(latest)
+        # # not sure about the difference between '4a. close (USD)' and '4b. close (USD)'
+
+    print(symbol)
+    print(latest_date)
+    print(latest['4a. close (USD)'])
+    print(to_usd(float(latest['4a. close (USD)'])))
+    
 
 
 def fetch_stocks_data(symbol):
     url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv"
-
     df = read_csv(url)
-    latest = df.iloc[0]
-    return latest
+    #latest = df.iloc[0]
+    return df 
 
 
 def fetch_unemployment_data():
     url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={ALPHAVANTAGE_API_KEY}"
     response = requests.get(url)
     parsed_response = json.loads(response.text) 
-    return parsed_response
+    data = parsed_response["data"]
+    latest = data[0]
+    print(latest) #> {'date': '2022-02-01', 'value': '3.8'}
+
+
+
+    from pandas import DataFrame
+    from plotly.express import bar
+
+
+    df = DataFrame(data)
+    print(df.head())
+
+    fig = bar(df, x="date", y="value", title="Unemployment Rates")
+    # https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html
+
+    # https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_yaxes
+    # https://plotly.com/python/reference/layout/yaxis/
+    # https://plotly.com/python/reference/layout/yaxis/#layout-yaxis-ticksuffix
+    fig.update_yaxes(
+        #tickprefix="$",
+        ticksuffix="%",
+        showgrid=True
+    )
+
+    fig.show()
+
+    #breakpoint()
+
+
+    print("DATAVIZ EXPORT...")
+     # https://plotly.com/python-api-reference/generated/plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.to_image
+    # fig.to_image(format="png")
+
+    # https://plotly.com/python/static-image-export/
+    # Image export using the "kaleido" engine requires the kaleido package,
+    #which can be installed using pip:
+    #    $ pip install -U kaleido
+    img_filepath = os.path.join(os.path.dirname(__file__), "..", "reports", "unemployment.png")
+    fig.write_image(img_filepath)
+
+
+    print("CSV EXPORT...")
+    csv_filepath = os.path.join(os.path.dirname(__file__), "..", "reports", "unemployment.csv")
+    df.to_csv(csv_filepath, index=False)

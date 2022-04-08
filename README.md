@@ -55,11 +55,13 @@ python -m app.groceries
 
 Run the stocks report: 
 ```sh 
-
 python -m app.stocks
-
 ``` 
 
+Run the unemployment email report: 
+```sh 
+python -m app.unemployment_email
+```
 
 
 Run the crypto report: 
